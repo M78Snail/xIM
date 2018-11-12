@@ -3,36 +3,45 @@ package client;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import protocol.Packet;
+import protocol.PacketCodeC;
+import protocol.request.LoginRequestPacket;
+import protocol.response.LoginResponsePacket;
+import protocol.response.MessageResponsePacket;
+import util.LoginUtil;
 
-import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.UUID;
 
 public class ImClientChannelHandler extends ChannelInboundHandlerAdapter {
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println(new Date() + ": 客户端写出数据");
+    public void channelActive(ChannelHandlerContext ctx) {
+        System.out.println(new Date() + ": 客户端开始登录");
 
-        ByteBuf byteBuf=getByteBuf(ctx,"您好，IM-netty");
+        // 创建登录对象
+        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
+        loginRequestPacket.setUserId(UUID.randomUUID().toString());
+        loginRequestPacket.setUsername("test");
+        loginRequestPacket.setPassword("test");
 
-        ctx.channel().writeAndFlush(byteBuf);
+        // 编码
+        ByteBuf buffer = PacketCodeC.INSTANCE.encode(ctx.alloc(), loginRequestPacket);
+
+        // 写数据
+        ctx.channel().writeAndFlush(buffer);
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf byteBuf = (ByteBuf) msg;
 
-        System.out.println(new Date() + ": 客户端读到数据 -> " + byteBuf.toString(Charset.forName("utf-8")));
+        Packet packet = PacketCodeC.INSTANCE.decode(byteBuf);
+
+        packet.doChannelRead(ctx,packet);
+
 
     }
 
-    private ByteBuf getByteBuf(ChannelHandlerContext ctx, String msg) {
-        byte[] bytes = msg.getBytes(Charset.forName("utf-8"));
 
-        ByteBuf buffer = ctx.alloc().buffer();
-
-        buffer.writeBytes(bytes);
-
-        return buffer;
-    }
 }

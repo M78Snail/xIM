@@ -1,17 +1,29 @@
 package client;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.Bootstrap;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import protocol.PacketCodeC;
+import protocol.request.MessageRequestPacket;
+import util.LoginUtil;
+
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
+import java.util.concurrent.*;
 
+/**
+ * @author duxiaoming
+ */
 public class ImClient {
     private static final int MAX_RETRY = 5;
     private static final String HOST = "127.0.0.1";
@@ -29,7 +41,7 @@ public class ImClient {
                 .option(ChannelOption.TCP_NODELAY, true)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel ch)  {
+                    protected void initChannel(SocketChannel ch) {
                         ch.pipeline().addLast(new ImClientChannelHandler());
                     }
                 });
@@ -41,6 +53,8 @@ public class ImClient {
         bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
                 System.out.println(new Date() + ": 连接成功，启动控制台线程……");
+                Channel channel = ((ChannelFuture) future).channel();
+                startConsoleThread(channel);
             } else if (retry == 0) {
                 System.err.println("重试次数已用完，放弃连接！");
             } else {
@@ -51,6 +65,26 @@ public class ImClient {
                 System.err.println(new Date() + ": 连接失败，第" + order + "次重连……");
                 bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit
                         .SECONDS);
+            }
+        });
+    }
+
+    private static void startConsoleThread(Channel channel) {
+        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("terminal-pool-%d").build();
+        ExecutorService ex = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
+        ex.execute(() -> {
+            while (true) {
+                if (LoginUtil.hasLogin(channel)) {
+                    System.out.println("输入消息发送至服务端: ");
+                    Scanner sc = new Scanner(System.in);
+                    String line = sc.nextLine();
+
+                    MessageRequestPacket packet = new MessageRequestPacket();
+                    packet.setMessage(line);
+                    ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc(), packet);
+                    channel.writeAndFlush(byteBuf);
+                }
             }
         });
     }

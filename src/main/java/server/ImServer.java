@@ -8,6 +8,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 
+/**
+ * @author duxiaoming
+ */
 public class ImServer {
     public static void main(String[] args) {
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -22,7 +25,7 @@ public class ImServer {
                 .option(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
-                    protected void initChannel(NioSocketChannel ch){
+                    protected void initChannel(NioSocketChannel ch) {
                         ch.pipeline().addLast(new ImServerChannelHandler());
                     }
                 });
