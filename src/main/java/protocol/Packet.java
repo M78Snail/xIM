@@ -2,7 +2,6 @@ package protocol;
 
 
 import com.alibaba.fastjson.annotation.JSONField;
-import io.netty.channel.ChannelHandlerContext;
 import lombok.Data;
 
 @Data
@@ -17,6 +16,5 @@ public abstract class Packet {
     @JSONField(serialize = false)
     public abstract Byte getCommand();
 
-    public abstract void doChannelRead(ChannelHandlerContext ctx, Packet packet);
 
 }

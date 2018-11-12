@@ -16,7 +16,7 @@ import static protocol.commod.Command.*;
 
 public class PacketCodeC {
 
-    private static final int MAGIC_NUMBER = 0x12345678;
+    public static final int MAGIC_NUMBER = 0x12345678;
     public static final PacketCodeC INSTANCE = new PacketCodeC();
 
     private final Map<Byte, Class<? extends Packet>> packetTypeMap;
@@ -50,6 +50,20 @@ public class PacketCodeC {
         byteBuf.writeBytes(bytes);
 
         return byteBuf;
+    }
+
+    public void encode(ByteBuf byteBuf, Packet packet) {
+
+        // 2. 序列化 java 对象
+        byte[] bytes = Serializer.DEFAULT.serialize(packet);
+
+        // 3. 实际编码过程
+        byteBuf.writeInt(MAGIC_NUMBER);
+        byteBuf.writeByte(packet.getVersion());
+        byteBuf.writeByte(Serializer.DEFAULT.getSerializerAlogrithm());
+        byteBuf.writeByte(packet.getCommand());
+        byteBuf.writeInt(bytes.length);
+        byteBuf.writeBytes(bytes);
     }
 
     public Packet decode(ByteBuf byteBuf) {

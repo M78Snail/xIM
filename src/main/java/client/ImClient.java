@@ -1,5 +1,9 @@
 package client;
 
+import client.handler.LoginResponseHandler;
+import client.handler.MessageResponseHandler;
+import codec.PacketDecoder;
+import codec.PacketEncoder;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.Bootstrap;
 
@@ -42,7 +46,10 @@ public class ImClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) {
-                        ch.pipeline().addLast(new ImClientChannelHandler());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
 
