@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb158ecd-7901-400f-9ddf-339e64499d81" name="Default Changelist" comment="tet2">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="fb158ecd-7901-400f-9ddf-339e64499d81" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/codec/Spliter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/ImClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/client/ImClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/client/ImClientChannelHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/server/ImServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/server/ImServer.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,7 +36,7 @@
       <usages-collector id="statistics.vcs.git.usages">
         <counts>
           <entry key="git.branch.checkout.local" value="10" />
-          <entry key="git.branch.create.new" value="2" />
+          <entry key="git.branch.create.new" value="3" />
           <entry key="git.branch.delete.local" value="1" />
         </counts>
       </usages-collector>
@@ -41,7 +44,7 @@
         <counts>
           <entry key="class" value="1" />
           <entry key="gitignore" value="1" />
-          <entry key="java" value="66" />
+          <entry key="java" value="68" />
           <entry key="xml" value="4" />
         </counts>
       </usages-collector>
@@ -49,22 +52,22 @@
         <counts>
           <entry key="CLASS" value="1" />
           <entry key="Git file" value="1" />
-          <entry key="JAVA" value="66" />
+          <entry key="JAVA" value="68" />
           <entry key="XML" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="21" />
-          <entry key="java" value="1854" />
-          <entry key="txt" value="60" />
+          <entry key="java" value="1875" />
+          <entry key="txt" value="71" />
           <entry key="xml" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1854" />
-          <entry key="PLAIN_TEXT" value="81" />
+          <entry key="JAVA" value="1875" />
+          <entry key="PLAIN_TEXT" value="92" />
           <entry key="XML" value="6" />
         </counts>
       </usages-collector>
@@ -76,10 +79,15 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/client/ImClientChannelHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/client/ImClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+            <state relative-caret-position="475">
+              <caret line="49" column="24" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1425#1891#0" expanded="true" />
+                <element signature="e#1890#1891#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,7 +97,7 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
@@ -99,10 +107,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/client/handler/LoginResponseHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/codec/Spliter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="35" column="95" selection-start-line="35" selection-start-column="95" selection-end-line="35" selection-end-column="95" />
+            <state relative-caret-position="133">
+              <caret line="7" column="20" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="20" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#206#207#0" expanded="true" />
+                <element signature="e#288#289#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -119,11 +132,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/server/ImServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="31" column="69" selection-start-line="31" selection-start-column="69" selection-end-line="31" selection-end-column="69" />
+            <state relative-caret-position="437">
+              <caret line="33" column="61" selection-start-line="33" selection-start-column="61" selection-end-line="33" selection-end-column="61" />
+              <folding>
+                <element signature="e#1052#1522#0" expanded="true" />
+                <element signature="e#1521#1522#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,7 +204,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="6粘包拆包" />
+        <entry key="$PROJECT_DIR$" value="5构建客户端与服务端pipeline" />
       </map>
     </option>
   </component>
@@ -217,10 +234,10 @@
         <option value="$PROJECT_DIR$/src/main/java/server/handler/LoginRequestHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/server/handler/MessageRequestHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/protocol/PacketCodeC.java" />
-        <option value="$PROJECT_DIR$/src/main/java/codec/Spliter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/server/ImServer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/client/ImClient.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/codec/Spliter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/client/ImClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/server/ImServer.java" />
       </list>
     </option>
   </component>
@@ -287,6 +304,54 @@
               <item name="im-netty" type="b2602c69:ProjectViewProjectNode" />
               <item name="im-netty" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="im-netty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="im-netty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="im-netty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="im-netty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="im-netty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="im-netty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="im-netty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="im-netty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="im-netty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="im-netty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="codec" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="im-netty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="im-netty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="im-netty" type="b2602c69:ProjectViewProjectNode" />
+              <item name="im-netty" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -300,6 +365,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -376,7 +444,7 @@
       <workItem from="1541986499836" duration="1733000" />
       <workItem from="1541994191342" duration="155000" />
       <workItem from="1541994374818" duration="13777000" />
-      <workItem from="1542018661953" duration="247000" />
+      <workItem from="1542018661953" duration="613000" />
     </task>
     <task id="LOCAL-00001" summary="init server">
       <created>1541747746149</created>
@@ -420,11 +488,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542015085567</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="git 忽略">
+      <created>1542018940400</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1542018940400</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22327000" />
+    <option name="totallyTimeSpent" value="22693000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -480,7 +555,8 @@
     <MESSAGE value="粘包拆包" />
     <MESSAGE value="tet" />
     <MESSAGE value="tet2" />
-    <option name="LAST_COMMIT_MESSAGE" value="tet2" />
+    <MESSAGE value="git 忽略" />
+    <option name="LAST_COMMIT_MESSAGE" value="git 忽略" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -568,6 +644,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -597,14 +676,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/codec/Spliter.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/client/ImClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -632,13 +703,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/server/ImServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="31" column="69" selection-start-line="31" selection-start-column="69" selection-end-line="31" selection-end-column="69" />
         </state>
       </provider>
     </entry>
@@ -689,5 +753,116 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/codec/Spliter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#206#207#0" expanded="true" />
+            <element signature="e#288#289#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/client/ImClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="49" column="24" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1425#1891#0" expanded="true" />
+            <element signature="e#1890#1891#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/server/ImServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="33" column="61" selection-start-line="33" selection-start-column="61" selection-end-line="33" selection-end-column="61" />
+          <folding>
+            <element signature="e#1052#1522#0" expanded="true" />
+            <element signature="e#1521#1522#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>im-netty</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.alibaba:fastjson:1.2.29</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

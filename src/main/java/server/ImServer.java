@@ -2,6 +2,7 @@ package server;
 
 import codec.PacketDecoder;
 import codec.PacketEncoder;
+import codec.Spliter;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -30,6 +31,7 @@ public class ImServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) {
+                        ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());
