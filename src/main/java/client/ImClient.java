@@ -9,17 +9,17 @@ import codec.PacketDecoder;
 import codec.PacketEncoder;
 import codec.Spliter;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import idle.ConnectionWatchdog;
 import io.netty.bootstrap.Bootstrap;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
+import io.netty.handler.timeout.IdleStateHandler;
+import io.netty.util.HashedWheelTimer;
 import util.SessionUtil;
 
 
@@ -35,45 +35,57 @@ public class ImClient {
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 8000;
 
+    protected final HashedWheelTimer timer = new HashedWheelTimer();
+
+    private Bootstrap bootstrap;
+
+
     public static void main(String[] args) {
+
+        new ImClient().connect(HOST, PORT, MAX_RETRY);
+    }
+
+    private void connect(String host, int port, int retry) {
+
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        Bootstrap bootstrap = new Bootstrap();
+        bootstrap = new Bootstrap();
+
+
 
         bootstrap.group(workerGroup)
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
                 .option(ChannelOption.SO_KEEPALIVE, true)
-                .option(ChannelOption.TCP_NODELAY, true)
-                .handler(new ChannelInitializer<SocketChannel>() {
-                    @Override
-                    protected void initChannel(SocketChannel ch) {
-                        ch.pipeline().addLast(new Spliter());
-                        ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
-                        ch.pipeline().addLast(LoginResponseHandler.INSTANCE);
-                        ch.pipeline().addLast(IMClientHandler.INSTANCE);
-                    }
-                });
+                .option(ChannelOption.TCP_NODELAY, true);
 
-        connect(bootstrap, HOST, PORT, MAX_RETRY);
-    }
+        final ConnectionWatchdog watchdog = new ConnectionWatchdog(bootstrap, timer, port,host, true) {
 
-    private static void connect(Bootstrap bootstrap, String host, int port, int retry) {
+            @Override
+            public ChannelHandler[] handlers() {
+                return new ChannelHandler[] {
+                        this,
+                        new Spliter(),
+                        new IdleStateHandler(0, 4, 0, TimeUnit.SECONDS),
+                        PacketCodecHandler.INSTANCE,
+                        LoginResponseHandler.INSTANCE,
+                        HeartBeatTimerHandler.INSTANCE,
+                        new IMClientHandler()
+                };
+            }
+        };
+        bootstrap.handler(new ChannelInitializer<Channel>() {
+            @Override
+            protected void initChannel(Channel ch) throws Exception {
+                ch.pipeline().addLast(watchdog.handlers());
+            }
+        });
+//        boot.connect(host,port);
         bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
                 System.out.println(new Date() + ": 连接成功，启动控制台线程……");
                 Channel channel = ((ChannelFuture) future).channel();
                 startConsoleThread(channel);
-            } else if (retry == 0) {
-                System.err.println("重试次数已用完，放弃连接！");
-            } else {
-                // 第几次重连
-                int order = (MAX_RETRY - retry) + 1;
-                // 本次重连的间隔
-                int delay = 1 << order;
-                System.err.println(new Date() + ": 连接失败，第" + order + "次重连……");
-                bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit
-                        .SECONDS);
             }
         });
     }
