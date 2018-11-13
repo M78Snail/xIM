@@ -1,8 +1,10 @@
 package client;
 
 import client.console.ConsoleCommandManager;
+import client.console.GroupMessageResponseHandler;
 import client.console.LoginConsoleCommand;
 import client.handler.*;
+import codec.PacketCodecHandler;
 import codec.PacketDecoder;
 import codec.PacketEncoder;
 import codec.Spliter;
@@ -47,14 +49,9 @@ public class ImClient {
                     @Override
                     protected void initChannel(SocketChannel ch) {
                         ch.pipeline().addLast(new Spliter());
-                        ch.pipeline().addLast(new PacketDecoder());
-                        ch.pipeline().addLast(new LoginResponseHandler());
-                        ch.pipeline().addLast(new MessageResponseHandler());
-                        ch.pipeline().addLast(new CreateGroupResponseHandler());
-                        ch.pipeline().addLast(new JoinGroupResponseHandler());
-                        ch.pipeline().addLast(new QuitGroupResponseHandler());
-                        ch.pipeline().addLast(new ListGroupMembersResponseHandler());
-                        ch.pipeline().addLast(new PacketEncoder());
+                        ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
+                        ch.pipeline().addLast(LoginResponseHandler.INSTANCE);
+                        ch.pipeline().addLast(IMClientHandler.INSTANCE);
                     }
                 });
 
@@ -93,9 +90,9 @@ public class ImClient {
         ex.execute(() -> {
             while (!Thread.interrupted()) {
                 if (!SessionUtil.hasLogin(channel)) {
-                    loginConsoleCommand.exec(sc,channel);
+                    loginConsoleCommand.exec(sc, channel);
                 } else {
-                    consoleCommandManager.exec(sc,channel);
+                    consoleCommandManager.exec(sc, channel);
 
                 }
             }
