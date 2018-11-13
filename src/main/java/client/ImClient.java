@@ -17,9 +17,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import protocol.request.LoginRequestPacket;
-import protocol.request.MessageRequestPacket;
-import server.handler.JoinGroupRequestHandler;
+
 import util.SessionUtil;
 
 
@@ -55,6 +53,7 @@ public class ImClient {
                         ch.pipeline().addLast(new CreateGroupResponseHandler());
                         ch.pipeline().addLast(new JoinGroupResponseHandler());
                         ch.pipeline().addLast(new QuitGroupResponseHandler());
+                        ch.pipeline().addLast(new ListGroupMembersResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
