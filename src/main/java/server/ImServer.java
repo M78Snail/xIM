@@ -10,6 +10,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import server.handler.AuthHandler;
+import server.handler.CreateGroupRequestHandler;
 import server.handler.LoginRequestHandler;
 import server.handler.MessageRequestHandler;
 
@@ -38,6 +39,7 @@ public class ImServer {
                         //登录验证
                         ch.pipeline().addLast(new AuthHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());
+                        ch.pipeline().addLast(new CreateGroupRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
