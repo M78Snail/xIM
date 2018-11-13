@@ -9,10 +9,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import server.handler.AuthHandler;
-import server.handler.CreateGroupRequestHandler;
-import server.handler.LoginRequestHandler;
-import server.handler.MessageRequestHandler;
+import server.handler.*;
 
 
 /**
@@ -40,6 +37,8 @@ public class ImServer {
                         ch.pipeline().addLast(new AuthHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());
                         ch.pipeline().addLast(new CreateGroupRequestHandler());
+                        ch.pipeline().addLast(new JoinGroupRequestHandler());
+                        ch.pipeline().addLast(new QuitGroupRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
