@@ -1,5 +1,6 @@
 package client.handler;
 
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import protocol.response.LoginResponsePacket;
@@ -11,8 +12,17 @@ import java.util.Date;
 /**
  * @author duxiaoming
  */
+
+@ChannelHandler.Sharable
 public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginResponsePacket> {
 
+    /**
+     * 构造单例
+     */
+    public static final LoginResponseHandler INSTANCE = new LoginResponseHandler();
+
+    private LoginResponseHandler() {
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginResponsePacket loginResponsePacket) {
