@@ -442,7 +442,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ImClient">
+  <component name="RunManager">
     <configuration name="ImClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.ImClient" />
       <module name="im-netty" />
@@ -475,6 +475,8 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ImClient" />
+        <item itemvalue="Application.ImServer" />
         <item itemvalue="Application.ImServer" />
         <item itemvalue="Application.ImClient" />
       </list>
